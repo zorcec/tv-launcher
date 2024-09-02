@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Launcher</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="renderer.js"></script>
+</head>
+<body>
+  <div class="controls">
+    <div id="lights" class="lights"></div>
+  </div>
+  <div class="video-container container">
+    <video autoplay muted loop id="background-video">
+      <source src="assets/video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="item">
+      <div id="netflix" class="image-button netflix"></div>
+    </div>
+    <div class="item">
+      <div id="simplitv" class="image-button simplitv"></div>
+    </div>
+    <div class="item">
+      <div id="gonet" class="image-button gonet"></div>
+    </div>
+    <div class="item">
+      <div id="youtube" class="image-button youtube"></div>
+    </div>
+  </div>
+</body>
+</html>
