@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { exec } = require('child_process');
+const process = require('node:process');
 
 let hyperion;
 
@@ -9,8 +10,8 @@ console.log('Started');
 function createWindow() {
     // Create the browser window.
     let win = new BrowserWindow({
-        //fullscreen: true,
-        //frame: false,
+        fullscreen: true,
+        frame: false,
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, 'preload.js')
@@ -86,5 +87,9 @@ function checkForTv() {
         }
     });
 }
+
+process.on('beforeExit', (code) => {
+    switchHyperion(false);
+});
 
 setInterval(checkForTv, 5000);
