@@ -60,11 +60,13 @@ ipcMain.on('openUrl', (event, url) => {
 });
 
 function switchHyperion(state) {
-    if (hyperion) {
+    if (!state && hyperion) {
         hyperion.kill('SIGINT');
+        hyperion.kill();
+        hyperion = null;
     }
-    if (state) {
-        hyperion = exec('hyperion-qt -f 15 -a 0.0.0.0:19401', (error, stdout, stderr) => {
+    if (state && !hyperion) {
+        hyperion = exec('hyperion-qt -f 10 -a 0.0.0.0:19401', (error, stdout, stderr) => {
             if (error) {
                 console.error(`Error executing command: ${error.message}`);
                 return;
