@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const { exec } = require('child_process');
+const { exec, execSync } = require('child_process');
 const process = require('node:process');
 
 let hyperion;
@@ -62,7 +62,7 @@ ipcMain.on('openUrl', (event, url) => {
 function switchHyperion(state) {
     if (!state && hyperion) {
         hyperion.kill('SIGINT');
-        hyperion.kill();
+        execSync('pkill -f hyperion');
         hyperion = null;
     }
     if (state && !hyperion) {
