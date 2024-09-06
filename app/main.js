@@ -2,17 +2,20 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { exec } = require('child_process');
 
+let hyperion;
+
 console.log('Started');
 
 function createWindow() {
     // Create the browser window.
     let win = new BrowserWindow({
         //fullscreen: true,
-        frame: false,
+        //frame: false,
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, 'preload.js')
-        }
+        },
+        
     });
 
     // Load the index.html of the app.
@@ -55,6 +58,33 @@ ipcMain.on('openUrl', (event, url) => {
     });
 });
 
-ipcMain.on('toggleLights', (event, url) => {
-    console.log('toggle lights');
-});
+function switchHyperion(state) {
+    if (hyperion) {
+        hyperion.kill('SIGINT');
+    }
+    if (state) {
+        hyperion = exec('hyperion-qt -f 15 -a 0.0.0.0:19401', (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error executing command: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                console.error(`stderr: ${stderr}`);
+                return;
+            }
+            console.log(`stdout: ${stdout}`);
+        });
+    }
+};
+
+function checkForTv() {
+    exec('xset -q', (error, stdout, stderr) => {
+        if(stdout.includes('Monitor is On')) {
+            switchHyperion(true);
+        } else {
+            switchHyperion(false);
+        }
+    });
+}
+
+setInterval(checkForTv, 5000);

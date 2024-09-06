@@ -11,8 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('youtube').addEventListener('click', () => {
         api.openUrl('https://youtube.com');
     });
-
-    document.getElementById('lights').addEventListener('click', () => {
+    document.getElementById('toggleLights').addEventListener('click', () => {
         api.toggleLights();
     });
 });

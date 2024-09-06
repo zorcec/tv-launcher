@@ -91,6 +91,7 @@ body {
     position: absolute;
     top: 25px;
     right: 25px;
+    z-index: 999;
 }
 
 .lights {
