@@ -4,8 +4,12 @@ const { exec, execSync } = require('child_process');
 const process = require('node:process');
 
 let hyperion;
+let checkForTvInterval;
+let isTvOn = false;
 
 console.log('Started');
+
+switchHyperion(true)
 
 function createWindow() {
     // Create the browser window.
@@ -59,30 +63,40 @@ ipcMain.on('openUrl', (event, url) => {
     });
 });
 
-function switchHyperion(state) {
-    if (!state && hyperion) {
-        hyperion.kill('SIGINT');
-        execSync('pkill -f hyperion');
-        hyperion = null;
-    }
-    if (state && !hyperion) {
-        hyperion = exec('hyperion-qt -f 10 -a 0.0.0.0:19401', (error, stdout, stderr) => {
-            if (error) {
-                console.error(`Error executing command: ${error.message}`);
-                return;
+function switchHyperion(state, block) {
+    try {
+        if (!state) {
+            if (hyperion) {
+                hyperion.kill('SIGINT');
             }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-                return;
+            if (block) {
+                execSync('pkill -f hyperion');
+            } else {
+                exec('pkill -f hyperion');
             }
-            console.log(`stdout: ${stdout}`);
-        });
-    }
+            hyperion = null;
+        }
+        if (state && !hyperion) {
+            hyperion = exec('hyperion-qt -f 10 -a 0.0.0.0:19401', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Error executing command: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`stdout: ${stdout}`);
+            });
+        }
+    } catch(err) {}
 };
 
 function checkForTv() {
-    exec('xset -q', (error, stdout, stderr) => {
-        if(stdout.includes('Monitor is On')) {
+    exec('xrandr', (error, stdout, stderr) => {
+        isTvOn = stdout.includes('HDMI-1 connected');
+        console.log(`Tv detected`, isTvOn);
+        if(isTvOn) {
             switchHyperion(true);
         } else {
             switchHyperion(false);
@@ -91,7 +105,13 @@ function checkForTv() {
 }
 
 process.on('beforeExit', (code) => {
-    switchHyperion(false);
+    switchHyperion(false, true);
+    clearInterval(checkForTvInterval);
 });
 
-setInterval(checkForTv, 5000);
+process.on('exit', (code) => {
+    switchHyperion(false, true);
+    clearInterval(checkForTvInterval);
+});
+
+//checkForTvInterval = setInterval(checkForTv, 5000);
