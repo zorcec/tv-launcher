@@ -11,9 +11,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('youtube').addEventListener('click', () => {
         api.openUrl('https://youtube.com');
     });
-    document.getElementById('toggleLights').addEventListener('click', () => {
-        api.toggleLights();
-    });
     document.getElementById('steam').addEventListener('click', () => {
         api.exec('flatpak run com.valvesoftware.SteamLink');
     });
