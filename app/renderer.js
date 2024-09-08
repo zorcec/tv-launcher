@@ -14,4 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('toggleLights').addEventListener('click', () => {
         api.toggleLights();
     });
+    document.getElementById('steam').addEventListener('click', () => {
+        api.exec('flatpak run com.valvesoftware.SteamLink');
+    });
 });

@@ -24,7 +24,7 @@ body {
     color: white;
     border-radius: 10px;
     text-align: center;
-    opacity: 0.85;
+    opacity: 0.7;
     width: 200px;
     height: 150px;
 }
@@ -34,7 +34,7 @@ body {
 }
 
 .item:hover {
-    opacity: 0.95;
+    opacity: 1;
 }
 
 .image-button {
@@ -65,6 +65,10 @@ body {
 
 .youtube {
     background-image: url('youtube.jpg');
+}
+
+.steam {
+    background-image: url('steam.jpg');
 }
 
 .video-container {
