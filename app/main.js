@@ -92,7 +92,7 @@ function switchHyperion(state, block) {
             hyperion = null;
         }
         if (state && !hyperion) {
-            hyperion = exec('hyperion-qt -f 15 -s 16 -a 0.0.0.0:19401', (error, stdout, stderr) => {
+            hyperion = exec('hyperion-qt -f 5 -s 16 -a 0.0.0.0:19401', (error, stdout, stderr) => {
                 if (error) {
                     console.error(`Error executing command: ${error.message}`);
                     return;
