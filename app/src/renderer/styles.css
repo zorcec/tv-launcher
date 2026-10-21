@@ -30,10 +30,11 @@ body {
 }
 
 .item-padding {
-    padding: 0 20px;;
+    padding: 0 20px;
 }
 
-.item:hover {
+.item:hover,
+.item:focus-within {
     opacity: 1;
 }
 
@@ -51,25 +52,33 @@ body {
     opacity: 0.7;
 }
 
-.netflix {
-    background-image: url('netflix.png');
+.image-button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    opacity: 1;
 }
 
-.simplitv {
-    background-color: #810963;
-    background-image: url('simplitv.png');
+.primevideo {
+    background-color: #00a8e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    text-transform: lowercase;
 }
 
 .gonet {
-    background-image: url('gonet.png');
+    background-image: url('../../assets/gonet.png');
 }
 
 .youtube {
-    background-image: url('youtube.jpg');
+    background-image: url('../../assets/youtube.jpg');
 }
 
 .steam {
-    background-image: url('steam.png');
+    background-image: url('../../assets/steam.png');
 }
 
 .video-container {
@@ -86,6 +95,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
+    object-fit: cover;
     background-size: cover;
 }
 
@@ -97,7 +107,7 @@ body {
 }
 
 .lights {
-    background-image: url('rgb.png');
+    background-image: url('../../assets/rgb.png');
     width: 25px;
     height: 25px;
     background-size: cover;

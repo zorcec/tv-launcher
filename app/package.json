@@ -1,14 +1,25 @@
 {
-  "name": "app",
+  "name": "tv-launcher",
   "version": "1.0.0",
-  "main": "main.js",
+  "description": "Fullscreen TV launcher (Electron kiosk) for streaming services and Steam Link",
+  "main": "src/main/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "npm run test:unit -- --run",
+    "test:unit": "vitest run --coverage",
+    "test:unit:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "lint": "node --check src/main/main.js && echo \"syntax OK\""
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "electron": "^32.0.1"
+    "@playwright/test": "^1.64.1",
+    "@vitest/coverage-istanbul": "^3.2.7",
+    "@vitest/coverage-v8": "^3.2.7",
+    "electron": "^32.0.1",
+    "jsdom": "^26.1.0",
+    "vitest": "^3.2.4"
   }
 }

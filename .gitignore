@@ -1,2 +1,16 @@
-node_modules
-assets/video.mp4
+node_modules/
+app/node_modules/
+coverage/
+app/coverage/
+test-results/
+app/test-results/
+playwright-report/
+app/playwright-report/
+playwright/.cache/
+*.log
+.DS_Store
+dist/
+out/
+# screenshots / generated images (keep bundled launcher icons)
+*.png
+!app/assets/*.png

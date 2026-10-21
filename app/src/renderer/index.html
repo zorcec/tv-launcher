@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <title>TV Launcher</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./renderer.js" defer></script>
+</head>
+<body>
+  <div class="controls">
+    <!--
+    <div id="toggleLights" class="lights"></div>
+    -->
+  </div>
+  <main class="video-container container" aria-label="TV launcher">
+    <video autoplay muted loop id="background-video" data-testid="background-video" aria-hidden="true">
+      <source src="../../assets/more1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="item">
+      <div id="primevideo" data-testid="app-primevideo" role="button" tabindex="0" aria-label="Open Prime Video" class="image-button primevideo">prime video</div>
+    </div>
+    <div class="item">
+      <div id="gonet" data-testid="app-gonet" role="button" tabindex="0" aria-label="Open GoNet TV" class="image-button gonet"></div>
+    </div>
+    <div class="item">
+      <div id="youtube" data-testid="app-youtube" role="button" tabindex="0" aria-label="Open YouTube" class="image-button youtube"></div>
+    </div>
+    <div class="item">
+      <div id="steam" data-testid="app-steam" role="button" tabindex="0" aria-label="Open Steam Link" class="image-button steam"></div>
+    </div>
+  </main>
+</body>
+</html>
